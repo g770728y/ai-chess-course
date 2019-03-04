@@ -1,13 +1,12 @@
 import * as React from 'react';
-import {
-  useCurrentGameId,
-  useGamePlayers,
-  useGameActiveRole,
-  useGameActivePlayer,
-  useCurrentGameWinner
-} from '../../helper';
-import { IPlayer, IRole } from '../store';
+import { IGameInfo_Player, IRole } from '../../store';
 import clock from './clock.png';
+import {
+  useGameActivePlayer,
+  useCurrentGameWinner,
+  useCurrentGameId,
+  useGamePlayers
+} from '../../store/hooks';
 
 function piece(bg: 'black' | 'white') {
   return (
@@ -18,7 +17,7 @@ function piece(bg: 'black' | 'white') {
   );
 }
 
-function playerInfo(gameId: number, player: IPlayer) {
+function playerInfo(gameId: number, player: IGameInfo_Player) {
   const activePlayer = useGameActivePlayer(gameId);
   const winner: IRole | undefined = useCurrentGameWinner();
   const isActive = activePlayer.id === player.id;

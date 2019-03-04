@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { IRole } from '../store';
+import { IRole } from '../../store';
 
 type IProps = {
   r: number;

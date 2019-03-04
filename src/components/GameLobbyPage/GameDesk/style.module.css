@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.desk {
+  width: 150px;
+  height: 150px;
+  border: 1px solid red;
+  border-radius: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+}
+
+.chair {
+  width: 50px;
+  height: 50px;
+  border: 1px solid red;
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

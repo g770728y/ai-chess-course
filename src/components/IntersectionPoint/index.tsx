@@ -1,7 +1,6 @@
 import * as React from 'react';
-import { deref } from '@libre/atom';
-import { IStep, appState } from '../store';
-import { onStep, getActiveRole } from '../../helper';
+import { IStep } from '../../store';
+import { getActiveRole, onStep } from '../../store/helper';
 
 interface IProps {
   r: number;

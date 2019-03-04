@@ -5,9 +5,9 @@ export type IRole = 'w' | 'b';
 
 export type IStep = [/* rowIdx */ number, /* colIdx */ number, 'w' | 'b'];
 
-export type IActive = 'me' | 'ai';
+export type IActive = 'human' | 'ai';
 
-export type IPlayer = {
+export type IGameInfo_Player = {
   id: number;
   role: IRole;
   name: string;
@@ -15,7 +15,7 @@ export type IPlayer = {
 };
 
 export interface IGameInfo {
-  players: [IPlayer, IPlayer];
+  players: [IGameInfo_Player, IGameInfo_Player];
 }
 
 export type IGameState = 'ready' | 'working' | 'finished';
@@ -27,14 +27,30 @@ export interface IGameData {
   winner?: IRole;
 }
 
+export type IPageType = 'game-list' | 'game-lobby';
+
+export interface IPlayer {
+  id: number;
+  name: string;
+  no: string;
+}
+
+export interface IDesk {
+  id: number;
+  players: ({ id: number; name: string; active: IRole } | undefined)[];
+}
+
 export type IStore = {
+  ui: {
+    currentPage: IPageType;
+  };
   user?: IUser;
   currentGameId: number;
   currentGameData: IGameData;
   gameList: { [id: number]: IGameInfo };
+  players: IPlayer[];
+  desks: IDesk[];
 };
-
-export const appState = Atom.of<IStore>(store);
 
 export interface IUser {
   id: number;
@@ -42,3 +58,5 @@ export interface IUser {
   password?: string;
   no: string;
 }
+
+export const appState = Atom.of<IStore>(store);

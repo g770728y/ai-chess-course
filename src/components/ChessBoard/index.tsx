@@ -1,12 +1,9 @@
 import * as React from 'react';
-import * as R from 'ramda';
-import { IntersectionPoint } from '../IntersectionPoint';
-import { dividableNumber, useCurrentSteps } from '../../helper';
 import { ChessPiece } from '../ChessPiece';
-import { IStep, appState } from '../store';
-import { useAtom } from '@dbeining/react-atom';
 import { ChessGrid } from '../ChessGrid';
 import { IntersectionPoints } from '../IntersectionPoints';
+import { dividableNumber } from '../../store/helper';
+import { useCurrentSteps } from '../../store/hooks';
 
 interface IProps {
   // 棋盘全宽

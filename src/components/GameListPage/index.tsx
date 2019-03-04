@@ -4,7 +4,7 @@ import { GRID_COUNT } from '../../constant';
 import { GameList } from '../GameList';
 import { GameInfo } from '../GameInfo';
 
-export function Page() {
+export function GameListPage() {
   return (
     <div className="page-container">
       <div className="game-list">

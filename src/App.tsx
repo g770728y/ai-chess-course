@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { ChessBoard } from './components/ChessBoard';
-import { GRID_COUNT } from './constant';
+import { GameListPage } from './components/GameListPage';
 import { useAtom } from '@dbeining/react-atom';
-import { Page } from './components/Page';
+import { appState } from './store';
+import { GameLobbyPage } from './components/GameLobbyPage';
+import { Header } from './components/Header';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Page />
-      </div>
-    );
-  }
+export function App() {
+  const currentPage = useAtom(appState, { select: s => s.ui.currentPage });
+  const page =
+    currentPage === 'game-list' ? <GameListPage /> : <GameLobbyPage />;
+
+  return (
+    <div className="App">
+      <Header />
+      {page}
+    </div>
+  );
 }
-
-export default App;
