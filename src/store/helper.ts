@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { deref, swap } from '@libre/atom';
-import { IStore, appState, IRole } from '.';
+import { IStore, appState, IRole, IUser } from '.';
 
 // 找到最接近的可整除d的值(防止出现小数px值)
 export function dividableNumber(n: number, d: number): number {
@@ -37,9 +37,9 @@ export function writeLocalStorage(k: string, v: object | string) {
 }
 
 // 读取localStorage
-export function readLocalStorage(k: string, parse?: boolean) {
-  const v = localStorage.getItem(k);
-  return parse && v !== null && v.length > 0 ? JSON.parse(v) : v;
+export function readUserFromLocalStorage(): IUser | undefined {
+  const v = localStorage.getItem('user');
+  return v !== null ? (JSON.parse(v) as IUser) : undefined;
 }
 
 // 清空localStorage

@@ -1,6 +1,6 @@
 import * as R from 'ramda';
-import { IStore, IRole } from '.';
-import { readLocalStorage } from './helper';
+import { IStore, IRole, IUser, IActive } from '.';
+import { readUserFromLocalStorage } from './helper';
 
 const desks = R.range(0, 20).map(i => ({
   id: i + 1,
@@ -17,7 +17,8 @@ export const store: IStore = {
   //   password: 'xxx',
   //   no: 'xx'
   // },
-  user: readLocalStorage('user', true),
+  user: readUserFromLocalStorage(),
+  // 当前用户是否正在游戏(显示游戏界面)
   currentGameId: 1,
   currentGameData: {
     status: 'working',
@@ -67,13 +68,13 @@ export const store: IStore = {
     {
       id: 1,
       players: [
-        { id: 1, name: 'gtt', active: 'ai' as IRole },
-        { id: 2, name: 'wsq', active: 'human' as IRole }
+        { id: 1, name: 'gtt', active: 'ai' as IActive },
+        { id: 2, name: 'wsq', active: 'human' as IActive }
       ]
     },
     {
       id: 2,
-      players: [{ id: 3, name: '北乔峰', active: 'ai' as IRole }, undefined]
+      players: [{ id: 3, name: '北乔峰', active: 'ai' as IActive }, undefined]
     },
     ...desks.slice(2)
   ]

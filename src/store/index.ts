@@ -37,7 +37,7 @@ export interface IPlayer {
 
 export interface IDesk {
   id: number;
-  players: ({ id: number; name: string; active: IRole } | undefined)[];
+  players: ({ id: number; name: string; active: IActive } | undefined)[];
 }
 
 export type IStore = {

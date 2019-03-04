@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import styles from './App.module.scss';
 import { GameListPage } from './components/GameListPage';
 import { useAtom } from '@dbeining/react-atom';
 import { appState } from './store';
@@ -12,7 +12,7 @@ export function App() {
     currentPage === 'game-list' ? <GameListPage /> : <GameLobbyPage />;
 
   return (
-    <div className="App">
+    <div className={styles['App']}>
       <Header />
       {page}
     </div>

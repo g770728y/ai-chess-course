@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './style.module.css';
-import { useAtom } from '@dbeining/react-atom';
-import { appState, IDesk } from '../../../store';
+import { IDesk } from '../../../store';
+import { sitDown } from '../../../store/actions';
 
 export function GameDesk({ data }: { data: IDesk }) {
   const [leftPlayer, rightPlayer] = data.players;
@@ -13,11 +13,21 @@ export function GameDesk({ data }: { data: IDesk }) {
       ? '空'
       : `${rightPlayer.name}-${rightPlayer.active}`;
 
+  function handleSeatClick(idx: number) {
+    if (data.players[idx] === undefined) {
+      sitDown(data.id, idx, 'ai');
+    }
+  }
+
   return (
     <div className={styles.container}>
-      <div className={styles.chair}>{leftPlayerNode}</div>
+      <div className={styles.seat} onClick={() => handleSeatClick(0)}>
+        {leftPlayerNode}
+      </div>
       <div className={styles.desk}>{data.id}</div>
-      <div className={styles.chair}>{rightPlayerNode}</div>
+      <div className={styles.seat} onClick={() => handleSeatClick(1)}>
+        {rightPlayerNode}
+      </div>
     </div>
   );
 }
