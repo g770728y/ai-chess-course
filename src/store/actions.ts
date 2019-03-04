@@ -26,3 +26,10 @@ export function login(user: IUser) {
     user
   }));
 }
+
+export function logout() {
+  swap(appState, s => ({
+    ...s,
+    user: undefined
+  }));
+}

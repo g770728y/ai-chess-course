@@ -30,3 +30,19 @@ export function toggleCurrentGame(gameId: number) {
 export function getActiveRole(): IRole {
   return deref(appState).currentGameData.activeRole || 'b';
 }
+
+// 写到localStorage
+export function writeLocalStorage(k: string, v: object | string) {
+  localStorage.setItem(k, typeof v === 'string' ? v : JSON.stringify(v));
+}
+
+// 读取localStorage
+export function readLocalStorage(k: string, parse?: boolean) {
+  const v = localStorage.getItem(k);
+  return parse && v !== null && v.length > 0 ? JSON.parse(v) : v;
+}
+
+// 清空localStorage
+export function clearLocalStorage() {
+  localStorage.clear();
+}

@@ -1,9 +1,15 @@
 import * as React from 'react';
 import { useAtom } from '@dbeining/react-atom';
-import { appState, IStep, IGameInfo_Player, IRole } from '.';
+import { appState, IStep, IGameInfo_Player, IRole, IUser } from '.';
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////  全部 hooks   //////////////////////////////////////////////////////
+export function useUser(): IUser | undefined {
+  return useAtom(appState, {
+    select: s => s.user
+  });
+}
+
 export function useCurrentGameId() {
   return useAtom(appState, {
     select: s => s.currentGameId

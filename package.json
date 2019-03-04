@@ -12,6 +12,7 @@
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
+    "react-use-form-state": "^0.7.0",
     "typescript": "3.3.3333"
   },
   "scripts": {

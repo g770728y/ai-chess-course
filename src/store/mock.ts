@@ -1,5 +1,6 @@
 import * as R from 'ramda';
 import { IStore, IRole } from '.';
+import { readLocalStorage } from './helper';
 
 const desks = R.range(0, 20).map(i => ({
   id: i + 1,
@@ -10,12 +11,13 @@ export const store: IStore = {
   ui: {
     currentPage: 'game-lobby'
   },
-  user: {
-    id: 1,
-    name: 'gtt',
-    password: 'xxx',
-    no: 'xx'
-  },
+  // user: {
+  //   id: 1,
+  //   name: 'gtt',
+  //   password: 'xxx',
+  //   no: 'xx'
+  // },
+  user: readLocalStorage('user', true),
   currentGameId: 1,
   currentGameData: {
     status: 'working',
