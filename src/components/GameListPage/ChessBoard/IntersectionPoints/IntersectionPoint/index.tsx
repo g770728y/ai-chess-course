@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IStep } from '../../store';
-import { getActiveRole, onStep } from '../../store/helper';
+import { IStep } from '../../../../../store';
+import { getActiveRole, onStep } from '../../../../../store/helper';
 
 interface IProps {
   r: number;

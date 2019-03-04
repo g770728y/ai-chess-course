@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { useCurrentGameId, useGameIds } from '../../store/hooks';
-import { toggleCurrentGame } from '../../store/helper';
+import { useCurrentGameId, useGameIds } from '../../../store/hooks';
+import { toggleCurrentGame } from '../../../store/helper';
 
 export function GameList() {
   const currentGameId = useCurrentGameId();

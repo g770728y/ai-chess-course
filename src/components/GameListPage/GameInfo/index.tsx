@@ -1,12 +1,12 @@
 import * as React from 'react';
-import { IGameInfo_Player, IRole } from '../../store';
+import { IGameInfo_Player, IRole } from '../../../store';
 import clock from './clock.png';
 import {
   useGameActivePlayer,
   useCurrentGameWinner,
   useCurrentGameId,
   useGamePlayers
-} from '../../store/hooks';
+} from '../../../store/hooks';
 
 function piece(bg: 'black' | 'white') {
   return (

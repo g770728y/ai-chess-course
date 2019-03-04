@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { ChessBoard } from '../ChessBoard';
+import { ChessBoard } from './ChessBoard';
 import { GRID_COUNT } from '../../constant';
-import { GameList } from '../GameList';
-import { GameInfo } from '../GameInfo';
+import { GameList } from './GameList';
+import { GameInfo } from './GameInfo';
 
 export function GameListPage() {
   return (

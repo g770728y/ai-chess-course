@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as R from 'ramda';
-import { IntersectionPoint } from '../IntersectionPoint';
+import { IntersectionPoint } from './IntersectionPoint';
 
 interface IProps {
   n: number;

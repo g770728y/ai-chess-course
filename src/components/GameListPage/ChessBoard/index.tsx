@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { ChessPiece } from '../ChessPiece';
-import { ChessGrid } from '../ChessGrid';
-import { IntersectionPoints } from '../IntersectionPoints';
-import { dividableNumber } from '../../store/helper';
-import { useCurrentSteps } from '../../store/hooks';
+import { ChessPiece } from './ChessPiece';
+import { ChessGrid } from './ChessGrid';
+import { IntersectionPoints } from './IntersectionPoints';
+import { dividableNumber } from '../../../store/helper';
+import { useCurrentSteps } from '../../../store/hooks';
 
 interface IProps {
   // 棋盘全宽
