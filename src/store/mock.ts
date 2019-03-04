@@ -1,8 +1,8 @@
-import * as R from 'ramda';
 import { IStore, IRole, IUser, IActive } from '.';
 import { readUserFromLocalStorage } from './helper';
+import { range } from 'rambda';
 
-const desks = R.range(0, 20).map(i => ({
+const desks = range(0, 20).map(i => ({
   id: i + 1,
   players: [undefined, undefined]
 }));

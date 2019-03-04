@@ -1,5 +1,5 @@
 import { swap } from '@libre/atom';
-import { appState, IPageType, IUser, IRole, IActive, IDesk, IPlayer } from '.';
+import { appState, IPageType, IUser, IActive, IDesk, IPlayer } from '.';
 
 ////////////////////////////////////////////////////////////////////  updator ////////////////////////////////////////////////////////////
 export function enterPage(currentPage: IPageType) {

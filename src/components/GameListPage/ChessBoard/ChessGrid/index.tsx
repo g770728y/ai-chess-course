@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as R from 'ramda';
+import { range } from 'rambda';
 
 // 画棋盘网格线
 export function ChessGrid({ n, cellSize }: { n: number; cellSize: number }) {
-  const cellsPerLine = R.range(0, n).map(i => (
+  const cellsPerLine = range(0, n).map(i => (
     <td
       key={i}
       style={{
@@ -13,7 +13,7 @@ export function ChessGrid({ n, cellSize }: { n: number; cellSize: number }) {
       }}
     />
   ));
-  const lines = R.range(0, n).map(i => <tr key={i}>{cellsPerLine}</tr>);
+  const lines = range(0, n).map(i => <tr key={i}>{cellsPerLine}</tr>);
   const board = (
     <table
       style={{

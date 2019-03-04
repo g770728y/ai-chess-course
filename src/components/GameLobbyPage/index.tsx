@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styles from './style.module.css';
 import { GameDesk } from './GameDesk';
-import * as R from 'ramda';
 import { useAtom } from '@dbeining/react-atom';
 import { appState, IPlayer, IDesk } from '../../store';
 
