@@ -1,0 +1,16 @@
+.game-info {
+  width: 300px;
+  padding: 10px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  background: #999;
+
+  .row {
+    min-height: 40px;
+    padding: 8px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 30px;
+  }
+}

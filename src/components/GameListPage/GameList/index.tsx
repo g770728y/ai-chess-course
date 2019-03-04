@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useCurrentGameId, useGameIds } from '../../../store/hooks';
 import { toggleCurrentGame } from '../../../store/helper';
+import styles from './style.module.scss';
 
 export function GameList() {
   const currentGameId = useCurrentGameId();
@@ -9,8 +10,8 @@ export function GameList() {
   return (
     <div>
       {(gameIds || []).map(gameId => {
-        const className = `game-list-item ${currentGameId === gameId &&
-          'active'}`;
+        const className = `${styles['game-list-item']} ${currentGameId ===
+          gameId && styles['active']}`;
         return (
           <div
             onClick={() => toggleCurrentGame(gameId)}

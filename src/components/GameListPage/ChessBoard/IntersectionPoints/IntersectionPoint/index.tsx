@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IStep } from '../../../../../store';
 import { getActiveRole, onStep } from '../../../../../store/helper';
+import styles from './style.module.scss';
 
 interface IProps {
   r: number;
@@ -36,7 +37,7 @@ const _IntersectionPoint: React.SFC<IProps> = ({
   return (
     <div
       onClick={placeChessPiece}
-      className={'intersection-point'}
+      className={styles['intersection-point']}
       ref={ref}
       style={style}
     />

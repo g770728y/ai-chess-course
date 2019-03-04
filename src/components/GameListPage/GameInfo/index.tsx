@@ -7,6 +7,7 @@ import {
   useCurrentGameId,
   useGamePlayers
 } from '../../../store/hooks';
+import styles from './style.module.scss';
 
 function piece(bg: 'black' | 'white') {
   return (
@@ -42,12 +43,12 @@ export function GameInfo() {
         role0.charCodeAt(0) - role1.charCodeAt(1)
     );
   return (
-    <div className="game-info">
-      <div className="row">
+    <div className={styles['game-info']}>
+      <div className={styles['row']}>
         {piece('black')}
         {playerInfo(gameId, players[0])}
       </div>
-      <div className="row">
+      <div className={styles['row']}>
         {piece('white')}
         {playerInfo(gameId, players[1])}
       </div>

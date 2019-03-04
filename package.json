@@ -31,6 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/ramda": "^0.25.51"
+    "@types/ramda": "^0.25.51",
+    "node-sass": "^4.11.0"
   }
 }

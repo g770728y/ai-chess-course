@@ -1,0 +1,10 @@
+.intersection-point {
+  position: absolute;
+  background: #666;
+  opacity: 0;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 1;
+  }
+}

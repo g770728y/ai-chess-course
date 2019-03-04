@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { IRole } from '../../../../store';
+import styles from './style.module.scss';
 
 type IProps = {
   r: number;
@@ -20,7 +21,7 @@ function _ChessPiece({ r, rowIdx, colIdx, role, cellSize }: IProps) {
     left: colIdx * cellSize - r,
     top: rowIdx * cellSize - r
   };
-  return <div className={'chess-piece'} style={style} />;
+  return <div className={styles['chess-piece']} style={style} />;
 }
 
 export const ChessPiece = React.memo(_ChessPiece);

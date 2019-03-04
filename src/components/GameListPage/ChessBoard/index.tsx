@@ -4,6 +4,7 @@ import { ChessGrid } from './ChessGrid';
 import { IntersectionPoints } from './IntersectionPoints';
 import { dividableNumber } from '../../../store/helper';
 import { useCurrentSteps } from '../../../store/hooks';
+import styles from './style.module.scss';
 
 interface IProps {
   // 棋盘全宽
@@ -41,7 +42,7 @@ export const ChessBoard: React.SFC<IProps> = ({ w, n }) => {
   ));
 
   return (
-    <div className="chess-board" style={{ padding: 40, width: width + 80 }}>
+    <div className={styles['chess-board']} style={{ width: width + 80 }}>
       <div style={{ position: 'relative' }}>
         {grid}
         {intersectionPoints}
