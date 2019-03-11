@@ -4,6 +4,8 @@ import styles from './style.module.css';
 import { doLogout, doLogin, doRegister, IUserInput } from '../../store/effects';
 import { useUser } from '../../store/hooks';
 import { useFormState } from 'react-use-form-state';
+import { Link } from 'react-router-dom';
+import { LinkButton } from '../common/LinkButton';
 
 export function Header() {
   const user = useUser();
@@ -27,7 +29,10 @@ export function Header() {
   return (
     <div className={styles['app-header']}>
       <div>围棋AI对战训练</div>
-      <button onClick={enterGameListPage}>观战</button>
+      <LinkButton to={'/'}>111</LinkButton>
+      <button onClick={enterGameListPage}>
+        <Link to="/">观战</Link>
+      </button>
       <button onClick={enterGameLobbyPage}>对战</button>
       <button
         onClick={() => {

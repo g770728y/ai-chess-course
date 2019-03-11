@@ -5,6 +5,7 @@ import { useAtom } from '@dbeining/react-atom';
 import { appState } from './store';
 import { GameLobbyPage } from './components/GameLobbyPage';
 import { Header } from './components/Header';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 export function App() {
   const currentPage = useAtom(appState, { select: s => s.ui.currentPage });
@@ -12,9 +13,11 @@ export function App() {
     currentPage === 'game-list' ? <GameListPage /> : <GameLobbyPage />;
 
   return (
-    <div className={styles['App']}>
-      <Header />
-      {page}
-    </div>
+    <Router>
+      <div className={styles['App']}>
+        <Header />
+        {page}
+      </div>
+    </Router>
   );
 }

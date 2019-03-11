@@ -36,7 +36,7 @@ export function useGamePlayers(gameId: number) {
 
 export function useGameActiveRole(gameId: number) {
   return useAtom(appState, {
-    select: s => s.currentGameData.activeRole
+    select: s => s.currentGameData.activeRole || 'b'
   });
 }
 
