@@ -19,12 +19,19 @@ export const store: IStore = {
   // },
   user: readUserFromLocalStorage(),
   // 当前用户是否正在游戏(显示游戏界面)
-  currentGameId: 1,
-  currentGameData: {
-    status: 'working',
-    activeRole: 'w',
-    steps: [[0, 0, 'b'], [0, 1, 'w']],
-    winner: undefined
+  game: {
+    loading: false,
+    data: {
+      id: 1,
+      status: 'working',
+      activeRole: 'w',
+      steps: [[0, 0, 'b'], [0, 1, 'w']],
+      winner: undefined,
+      players: [
+        { id: 1, role: 'b', name: 'gtt', active: 'ai' },
+        { id: 2, role: 'w', name: 'wsq', active: 'human' }
+      ]
+    }
   },
   gameList: {
     1: {

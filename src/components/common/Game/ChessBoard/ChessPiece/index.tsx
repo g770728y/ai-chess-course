@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { IRole } from '../../../../store';
 import styles from './style.module.scss';
+import { IRole } from '../../../../../store';
 
 type IProps = {
   r: number;
@@ -11,7 +11,6 @@ type IProps = {
 };
 
 function _ChessPiece({ r, rowIdx, colIdx, role, cellSize }: IProps) {
-  console.log('chess piece render');
   const style: React.CSSProperties = {
     position: 'absolute',
     background: role === 'w' ? 'white' : 'black',

@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { IGameInfo_Player, IRole } from '../../../store';
 import clock from './clock.png';
+import styles from './style.module.scss';
+import { IGameInfo_Player, IRole } from '../../../../store';
 import {
   useGameActivePlayer,
   useCurrentGameWinner,
   useCurrentGameId,
   useGamePlayers
-} from '../../../store/hooks';
-import styles from './style.module.scss';
+} from '../../../../store/hooks';
 
 function piece(bg: 'black' | 'white') {
   return (

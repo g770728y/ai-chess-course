@@ -21,10 +21,12 @@ export interface IGameInfo {
 export type IGameState = 'ready' | 'working' | 'finished';
 
 export interface IGameData {
+  id: number;
   status: IGameState;
   activeRole: IRole;
   steps: IStep[];
   winner?: IRole;
+  players: [IGameInfo_Player, IGameInfo_Player];
 }
 
 export type IPageType = 'game-list' | 'game-lobby';
@@ -45,8 +47,10 @@ export type IStore = {
     currentPage: IPageType;
   };
   user?: IUser;
-  currentGameId: number;
-  currentGameData: IGameData;
+  game: {
+    loading: boolean;
+    data: IGameData;
+  };
   gameList: { [id: number]: IGameInfo };
   players: IPlayer[];
   desks: IDesk[];

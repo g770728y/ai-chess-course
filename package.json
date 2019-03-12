@@ -4,18 +4,22 @@
   "private": true,
   "dependencies": {
     "@dbeining/react-atom": "^4.1.0",
+    "@material-ui/core": "^3.9.2",
+    "@material-ui/icons": "^3.0.2",
     "@types/jest": "24.0.9",
     "@types/node": "11.9.5",
     "@types/react": "16.8.5",
     "@types/react-dom": "16.8.2",
+    "@types/react-router-dom": "^4.3.1",
     "immer": "^2.1.0",
     "rambda": "^2.3.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-router-dom": "^4.3.1",
+    "react-router-dom": "^4.4.0-beta.7",
     "react-scripts": "2.1.5",
     "react-use-form-state": "^0.7.0",
-    "typescript": "3.3.3333"
+    "typescript": "3.3.3333",
+    "use-react-router": "^1.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -33,7 +37,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@types/react-router-dom": "^4.3.1",
+    "babel-plugin-jsx-control-statements": "^4.0.0",
     "node-sass": "^4.11.0"
   }
 }

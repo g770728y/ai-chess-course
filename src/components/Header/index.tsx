@@ -1,67 +1,44 @@
 import * as React from 'react';
-import { enterGameListPage, enterGameLobbyPage } from '../../store/actions';
-import styles from './style.module.css';
-import { doLogout, doLogin, doRegister, IUserInput } from '../../store/effects';
-import { useUser } from '../../store/hooks';
-import { useFormState } from 'react-use-form-state';
-import { Link } from 'react-router-dom';
-import { LinkButton } from '../common/LinkButton';
+import { AppBar, Toolbar, Typography, Tabs, Tab } from '@material-ui/core';
+import useReactRouter from 'use-react-router';
+import { Auth } from './Auth';
 
 export function Header() {
-  const user = useUser();
-  const [formState, { text, password }] = useFormState<IUserInput>({});
+  const { history, location } = useReactRouter();
 
-  const { values } = formState;
+  const handleTabClick = React.useCallback((e: any, value: string) => {
+    history.push(value);
+  }, []);
 
-  // 当前只进行 required 校验
-  const isInvalid = Object.values(formState.values).some(
-    v => (v as string).length <= 0
+  const matched = /^(\/[^\/]+)\/?/.exec(location.pathname);
+  const tabValue =
+    !matched || location.pathname === '/' ? '/game-list' : matched[1];
+
+  const result = (
+    <AppBar position="static" color="inherit">
+      <Toolbar variant="regular" style={{ minHeight: 48 }}>
+        <Typography variant="h6" color="inherit" noWrap>
+          围棋AI对战训练课
+        </Typography>
+        <div style={{ width: 32 }} />
+        <Tabs
+          onChange={handleTabClick}
+          value={tabValue}
+          indicatorColor="secondary"
+          textColor="secondary"
+        >
+          <Tab label="观战" value="/game-list" />
+          <Tab label="大厅" value="/lobby" />
+          <Tab label="战绩" value="/score" />
+          <Tab label="排行" value="/top" />
+        </Tabs>
+
+        <div style={{ width: 1, flexGrow: 1 }} />
+
+        <Auth />
+      </Toolbar>
+    </AppBar>
   );
 
-  const inputs = !user && (
-    <>
-      <input placeholder="用户名" {...text('name')} required />
-      <input placeholder="学号" {...text('no')} required />
-      <input placeholder="密码" {...password('password')} required />
-    </>
-  );
-
-  return (
-    <div className={styles['app-header']}>
-      <div>围棋AI对战训练</div>
-      <LinkButton to={'/'}>111</LinkButton>
-      <button onClick={enterGameListPage}>
-        <Link to="/">观战</Link>
-      </button>
-      <button onClick={enterGameLobbyPage}>对战</button>
-      <button
-        onClick={() => {
-          console.log('尚未实现');
-        }}
-      >
-        战绩
-      </button>
-      <div style={{ width: 1, flexGrow: 1 }} />
-      {inputs}
-      {!user && (
-        <button onClick={() => doLogin(values)} disabled={isInvalid}>
-          登录
-        </button>
-      )}
-      {!user && (
-        <button onClick={() => doRegister(values)} disabled={isInvalid}>
-          注册
-        </button>
-      )}
-      {user && (
-        <span>
-          <span>学号:</span>
-          <span>{user.no}&nbsp;</span>
-          <span>姓名:</span>
-          <span>{user.name}&nbsp;</span>
-        </span>
-      )}
-      {!!user && <button onClick={() => doLogout()}>注销</button>}
-    </div>
-  );
+  return result;
 }

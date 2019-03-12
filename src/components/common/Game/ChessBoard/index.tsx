@@ -2,9 +2,9 @@ import * as React from 'react';
 import { ChessPiece } from './ChessPiece';
 import { ChessGrid } from './ChessGrid';
 import { IntersectionPoints } from './IntersectionPoints';
-import { dividableNumber } from '../../../store/helper';
-import { useCurrentSteps } from '../../../store/hooks';
 import styles from './style.module.scss';
+import { dividableNumber } from '../../../../store/helper';
+import { useCurrentSteps } from '../../../../store/hooks';
 
 interface IProps {
   // 棋盘全宽
@@ -14,7 +14,6 @@ interface IProps {
 }
 
 export const ChessBoard: React.SFC<IProps> = ({ w, n }) => {
-  console.log('render chess board');
   const width = dividableNumber(w, n) * 1.0;
 
   const cellSize = width / n;

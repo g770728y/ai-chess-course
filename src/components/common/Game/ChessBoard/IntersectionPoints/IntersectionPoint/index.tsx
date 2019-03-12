@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { IStep } from '../../../../../store';
 import styles from './style.module.scss';
-import { onStep } from '../../../../../store/actions';
 import {
-  useGameActiveRole,
-  useCurrentGameId
-} from '../../../../../store/hooks';
+  useCurrentGameId,
+  useGameActiveRole
+} from '../../../../../../store/hooks';
+import { IStep } from '../../../../../../store';
+import { onStep } from '../../../../../../store/actions';
 
 interface IProps {
   r: number;
@@ -22,7 +22,6 @@ const _IntersectionPoint: React.SFC<IProps> = ({
   cx,
   cy
 }) => {
-  console.log('render intersection point');
   const ref = React.createRef<HTMLDivElement>();
   const gameId = useCurrentGameId();
   const activeRole = useGameActiveRole(gameId);

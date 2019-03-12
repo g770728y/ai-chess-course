@@ -58,15 +58,15 @@ export function sitDown(deskId: number, playerIdx: number, active: IActive) {
 // 走一步
 export function onStep(step: [number, number, 'b' | 'w']) {
   update(s => {
-    const activeRole = s.currentGameData['activeRole'];
-    s.currentGameData.activeRole = activeRole === 'b' ? 'w' : 'b';
-    s.currentGameData.steps.push(step);
+    const activeRole = s.game.data['activeRole'];
+    s.game.data.activeRole = activeRole === 'b' ? 'w' : 'b';
+    s.game.data.steps.push(step);
   });
 }
 
 // 重置当前棋局
 export function toggleCurrentGame(gameId: number) {
   update(s => {
-    s.currentGameId = gameId;
+    s.game.data.id = gameId;
   });
 }
