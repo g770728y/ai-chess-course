@@ -7,26 +7,22 @@ export type IStep = [/* rowIdx */ number, /* colIdx */ number, 'w' | 'b'];
 
 export type IActive = 'human' | 'ai';
 
-export type IGameInfo_Player = {
+export type IGame_Player = {
   id: number;
   role: IRole;
   name: string;
   active: IActive;
 };
 
-export interface IGameInfo {
-  players: [IGameInfo_Player, IGameInfo_Player];
-}
-
 export type IGameState = 'ready' | 'working' | 'finished';
 
-export interface IGameData {
+export interface IGame {
   id: number;
-  status: IGameState;
-  activeRole: IRole;
-  steps: IStep[];
+  status?: IGameState;
+  activeRole?: IRole;
+  steps?: IStep[];
   winner?: IRole;
-  players: [IGameInfo_Player, IGameInfo_Player];
+  players: [IGame_Player, IGame_Player];
 }
 
 export type IPageType = 'game-list' | 'game-lobby';
@@ -43,17 +39,23 @@ export interface IDesk {
 }
 
 export type IStore = {
-  ui: {
-    currentPage: IPageType;
-  };
   user?: IUser;
   game: {
     loading: boolean;
-    data: IGameData;
+    data: IGame;
   };
-  gameList: { [id: number]: IGameInfo };
-  players: IPlayer[];
-  desks: IDesk[];
+  games: {
+    loading: boolean;
+    data: IGame[];
+  };
+  players: {
+    loading: boolean;
+    data: IPlayer[];
+  };
+  desks: {
+    loading: boolean;
+    data: IDesk[];
+  };
 };
 
 export interface IUser {

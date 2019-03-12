@@ -7,27 +7,13 @@ function update(updator: (store: IStore) => any) {
   swap(appState, s => produce(s, draft => updator(draft)));
 }
 
-export function enterPage(currentPage: IPageType) {
-  update(s => {
-    s.ui.currentPage = currentPage;
-  });
-}
-
-export function enterGameListPage() {
-  enterPage('game-list');
-}
-
-export function enterGameLobbyPage() {
-  enterPage('game-lobby');
-}
-
 // TODO: 新用户需要加入到 s.players中
 export function login(user: IUser) {
   update(s => {
-    const playerIdx = s.players.findIndex(p => p.id === user.id);
+    const playerIdx = s.players.data.findIndex(p => p.id === user.id);
     if (playerIdx < 0) {
       // 注册
-      s.players.push(user);
+      s.players.data.push(user);
     }
     s.user = user;
   });
@@ -43,15 +29,15 @@ export function logout() {
 // TODO: 这个方法应该在后台实现,  这里是mock
 export function sitDown(deskId: number, playerIdx: number, active: IActive) {
   update(s => {
-    const player = s.players.find(p => p.id === s.user!.id)!;
-    const deskIdx = s.desks.findIndex(d => d.id === deskId)!;
-    s.desks.forEach(desk => {
+    const player = s.players.data.find(p => p.id === s.user!.id)!;
+    const deskIdx = s.desks.data.findIndex(d => d.id === deskId)!;
+    s.desks.data.forEach(desk => {
       const deskPlayerIdx = desk.players.findIndex(
         p => !!p && p.id === player.id
       );
       delete desk['players'][deskPlayerIdx];
     });
-    s.desks[deskIdx]['players'][playerIdx] = { ...player, active };
+    s.desks.data[deskIdx]['players'][playerIdx] = { ...player, active };
   });
 }
 
@@ -60,7 +46,7 @@ export function onStep(step: [number, number, 'b' | 'w']) {
   update(s => {
     const activeRole = s.game.data['activeRole'];
     s.game.data.activeRole = activeRole === 'b' ? 'w' : 'b';
-    s.game.data.steps.push(step);
+    s.game.data.steps!.push(step);
   });
 }
 

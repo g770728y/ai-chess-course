@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useAtom } from '@dbeining/react-atom';
-import { appState, IStep, IGameInfo_Player, IRole, IUser, IDesk } from '.';
+import { appState, IStep, IGame_Player, IRole, IUser, IDesk, IGame } from '.';
+import * as R from 'rambda';
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////  全部 hooks   //////////////////////////////////////////////////////
@@ -18,8 +19,14 @@ export function useCurrentGameId() {
 
 export function useGameIds() {
   return useAtom(appState, {
-    select: s => Object.keys(s.gameList).map(i => parseInt(i))
+    select: s => Object.keys(s.games).map(i => parseInt(i))
   });
+}
+
+export function useGames() {
+  return useAtom(appState, {
+    select: s => s.games.data
+  }) as IGame[];
 }
 
 export function useCurrentSteps() {
@@ -30,7 +37,7 @@ export function useCurrentSteps() {
 
 export function useGamePlayers(gameId: number) {
   return useAtom(appState, {
-    select: s => s.gameList[gameId].players
+    select: s => s.games.data[gameId].players
   });
 }
 
@@ -41,7 +48,7 @@ export function useGameActiveRole(gameId: number) {
 }
 
 // 当前棋局的活动参与者
-export function useGameActivePlayer(gameId: number): IGameInfo_Player {
+export function useGameActivePlayer(gameId: number): IGame_Player {
   const activeRole = useAtom(appState, {
     select: s => s.game.data.activeRole || 'b'
   });
@@ -64,5 +71,5 @@ export function useCurrentGameWinner(): IRole | undefined {
 
 // 获取当前游戏大厅的棋桌信息
 export function useDesks(): IDesk[] {
-  return useAtom(appState, { select: s => s.desks }) as IDesk[];
+  return useAtom(appState, { select: s => s.desks.data }) as IDesk[];
 }

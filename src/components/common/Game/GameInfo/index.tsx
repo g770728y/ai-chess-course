@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clock from './clock.png';
 import styles from './style.module.scss';
-import { IGameInfo_Player, IRole } from '../../../../store';
+import { IGame_Player, IRole } from '../../../../store';
 import {
   useGameActivePlayer,
   useCurrentGameWinner,
@@ -18,7 +18,7 @@ function piece(bg: 'black' | 'white') {
   );
 }
 
-function playerInfo(gameId: number, player: IGameInfo_Player) {
+function playerInfo(gameId: number, player: IGame_Player) {
   const activePlayer = useGameActivePlayer(gameId);
   const winner: IRole | undefined = useCurrentGameWinner();
   const isActive = activePlayer.id === player.id;
