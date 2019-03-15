@@ -1,32 +1,35 @@
 import * as React from 'react';
-import { useCurrentGameId, useGameIds, useGames } from '../../../store/hooks';
-import styles from './style.module.scss';
-import { toggleCurrentGame } from '../../../store/actions';
+import { useCurrentGameId, useGames } from '../../../store/hooks';
 import {
   List,
   ListItem,
   ListItemText,
   Typography,
   Icon,
-  Grid
+  Grid,
+  Drawer
 } from '@material-ui/core';
 import SwapHoriz from '@material-ui/icons/SwapHoriz';
 import { IGame } from '../../../store';
+import useRouter from 'use-react-router';
 
 declare const gameItem: IGame;
 
 export function GameList() {
+  const { history, match } = useRouter();
   const currentGameId = useCurrentGameId();
-  const gameIds = useGameIds();
   const games = useGames();
-  console.log('games:', games);
+
+  const handleItemChange = React.useCallback((id: number) => {
+    history.push(`${match.path}/game/${id}`);
+  }, []);
 
   const itemText = (gameItem: IGame) => (
     <Grid
       container
       alignItems="center"
       justify="flex-start"
-      style={{ width: '100%' }}
+      style={{ width: '100%', padding: '4px 8px' }}
     >
       <Grid item style={{ width: '35%', flex: '1 1 1px' }}>
         {gameItem.players[0].name}{' '}
@@ -43,29 +46,16 @@ export function GameList() {
   return (
     <List component="nav">
       <For each="gameItem" index="_index" of={games}>
-        <ListItem button key={gameItem.id} style={{ padding: 0 }}>
-          {/* <If condition={} /> */}
+        <ListItem
+          selected={gameItem.id === currentGameId}
+          button
+          key={gameItem.id}
+          style={{ padding: 0 }}
+          onClick={() => handleItemChange(gameItem.id)}
+        >
           <ListItemText primary={itemText(gameItem)} />
         </ListItem>
       </For>{' '}
     </List>
   );
-
-  // return (
-  //   <div>
-  //     {(gameIds || []).map(gameId => {
-  //       const className = `${styles['game-list-item']} ${currentGameId ===
-  //         gameId && styles['active']}`;
-  //       return (
-  //         <div
-  //           onClick={() => toggleCurrentGame(gameId)}
-  //           key={gameId}
-  //           className={className}
-  //         >
-  //           {gameId}
-  //         </div>
-  //       );
-  //     })}
-  //   </div>
-  // );
 }

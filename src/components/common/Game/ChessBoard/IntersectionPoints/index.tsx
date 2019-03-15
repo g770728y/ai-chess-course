@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { IntersectionPoint } from './IntersectionPoint';
 import { range } from 'rambda';
+import { useCurrentUserMovable } from '../../../../../store/hooks';
 
 interface IProps {
   n: number;
@@ -10,6 +11,7 @@ interface IProps {
 
 // 画一个n行n列的交叉点网格
 function _IntersectionPoints({ n, cellSize, r }: IProps) {
+  const movable = useCurrentUserMovable();
   const intersectionPointsPerLine = (rowIdx: number) =>
     range(0, n + 1).map(colIdx => {
       const cx = colIdx * cellSize;
@@ -28,7 +30,8 @@ function _IntersectionPoints({ n, cellSize, r }: IProps) {
   const intersectionPoints = range(0, n + 1).map(i => (
     <div key={i}>{intersectionPointsPerLine(i)}</div>
   ));
-  return <>{intersectionPoints}</>;
+
+  return !!movable ? <>{intersectionPoints}</> : null;
 }
 
 export const IntersectionPoints = React.memo(_IntersectionPoints);

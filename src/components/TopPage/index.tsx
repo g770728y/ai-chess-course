@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useUser } from '../../store/hooks';
 import { Page404 } from '../common/404';
+import { Tops } from './Tops';
 
 const TopPage: React.SFC<any> = () => {
   const user = useUser();
@@ -8,7 +9,7 @@ const TopPage: React.SFC<any> = () => {
   if (!user) {
     return <Page404 />;
   } else {
-    return <div>尚未实现</div>;
+    return <Tops />;
   }
 };
 

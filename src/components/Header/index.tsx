@@ -29,7 +29,7 @@ export function Header() {
         >
           <Tab label="观战" value="/game-list" />
           <Tab label="大厅" value="/lobby" />
-          <Tab label="战绩" value="/score" />
+          <Tab label="战绩" value="/history" />
           <Tab label="排行" value="/top" />
         </Tabs>
 

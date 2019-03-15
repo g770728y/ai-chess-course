@@ -92,5 +92,32 @@ export const store: IStore = {
       },
       ...desks.slice(2)
     ]
+  },
+
+  histories: {
+    loading: false,
+    data: [
+      { opponentId: 1, result: 'win', createdAt: '2019-01-05' },
+      { opponentId: 2, result: 'lost', createdAt: '2019-01-03' },
+      { opponentId: 3, result: 'draw', createdAt: '2019-01-01' }
+    ]
+  },
+
+  stats: {
+    loading: false,
+    data: [
+      {
+        playerId: 2,
+        win: 3,
+        lost: 4,
+        draw: 3
+      },
+      {
+        playerId: 1,
+        win: 5,
+        lost: 10,
+        draw: 2
+      }
+    ]
   }
 };

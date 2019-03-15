@@ -3,6 +3,7 @@ import styles from './style.module.css';
 import { Route, Switch } from 'react-router';
 import { GameLobby } from './GameLobby';
 import useRouter from 'use-react-router';
+import { Game } from '../common/Game';
 
 export function GameLobbyPage() {
   const { match } = useRouter();
@@ -10,7 +11,7 @@ export function GameLobbyPage() {
     <div className={styles['container']}>
       <Switch>
         <Route exact path={`${match.path}`} component={GameLobby} />
-        <Route exact path={`${match.path}/game`} render={() => <div>局</div>} />
+        <Route exact path={`${match.path}/game/:id`} component={Game} />
       </Switch>
     </div>
   );

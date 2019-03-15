@@ -8,9 +8,9 @@ import { useDesks } from '../../../store/hooks';
 export function GameLobby() {
   const desks = useDesks();
 
-  const desksNode = desks.map(d => (
-    <div className={styles['desk-container']} key={d.id}>
-      <GameDesk data={d as IDesk} />
+  const desksNode = desks.map(({ id }) => (
+    <div className={styles['desk-container']} key={id}>
+      <GameDesk id={id} />
     </div>
   ));
   return (

@@ -1,18 +1,31 @@
-.chess-board-container {
-  height: 100%;
-  flex-grow: 1;
-  flex-shrink: 1;
-  background: #666;
-  padding: 50px;
-  display: flex;
-  justify-content: center;
-}
-
 .game-content {
-  width: 100%;
   display: flex;
+  width: 800px;
+  height: 100%;
+  flex: auto;
+  flex-wrap: nowrap;
   flex-direction: row;
+  align-items: stretch;
   justify-content: stretch;
-  flex-grow: 1;
-  flex-shrink: 1;
+
+  .chess-board-container {
+    width: 300px;
+    height: 100%;
+    flex: auto;
+    padding: 50px;
+    overflow-y: auto;
+
+    display: flex;
+    justify-content: center;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .game-info-container {
+    width: 300px;
+    height: 100%;
+    flex: none;
+  }
 }

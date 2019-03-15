@@ -4,8 +4,10 @@ import { IDesk } from '../../../store';
 import { sitDown } from '../../../store/actions';
 import { Button, ButtonBase } from '@material-ui/core';
 import useRouter from 'use-react-router';
+import { useDesk } from '../../../store/hooks';
 
-export function GameDesk({ data }: { data: IDesk }) {
+export function GameDesk({ id }: { id: number }) {
+  const data = useDesk(id);
   const { history, match } = useRouter();
 
   const [leftPlayer, rightPlayer] = data.players;
@@ -23,12 +25,16 @@ export function GameDesk({ data }: { data: IDesk }) {
     }
   }
 
+  if (id === 2) {
+    console.log(rightPlayer);
+  }
   const startGame = React.useCallback(() => {
     // TODO: 通知后台游戏开始
+    console.log('这里应改为: 通知后台开始游戏, 并从后台获取游戏id');
     if (leftPlayer && rightPlayer) {
-      history.push(`${match.path}/game`);
+      history.push(`${match.path}/game/1`);
     }
-  }, []);
+  }, [leftPlayer, rightPlayer]);
 
   return (
     <div className={styles.container}>

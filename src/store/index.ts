@@ -7,7 +7,7 @@ export type IStep = [/* rowIdx */ number, /* colIdx */ number, 'w' | 'b'];
 
 export type IActive = 'human' | 'ai';
 
-export type IGame_Player = {
+export type IGameInfo_Player = {
   id: number;
   role: IRole;
   name: string;
@@ -22,7 +22,7 @@ export interface IGame {
   activeRole?: IRole;
   steps?: IStep[];
   winner?: IRole;
-  players: [IGame_Player, IGame_Player];
+  players: [IGameInfo_Player, IGameInfo_Player];
 }
 
 export type IPageType = 'game-list' | 'game-lobby';
@@ -56,6 +56,14 @@ export type IStore = {
     loading: boolean;
     data: IDesk[];
   };
+  histories: {
+    loading: boolean;
+    data: IHistory[];
+  };
+  stats: {
+    loading: boolean;
+    data: IStat[];
+  };
 };
 
 export interface IUser {
@@ -64,5 +72,22 @@ export interface IUser {
   password?: string;
   no: string;
 }
+
+export interface IStat {
+  playerId: number;
+  player?: IPlayer;
+  win: number;
+  lost: number;
+  draw: number;
+}
+
+export interface IHistory {
+  opponentId: number;
+  opponent?: IPlayer;
+  result: IGameResult;
+  createdAt: string;
+}
+
+export type IGameResult = 'win' | 'lost' | 'draw';
 
 export const appState = Atom.of<IStore>(store);

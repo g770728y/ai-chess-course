@@ -9,8 +9,8 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom';
-import { ScorePage } from './components/ScorePage';
 import { TopPage } from './components/TopPage';
+import { HistoriesPage } from './components/HistoriesPage';
 
 export function App() {
   return (
@@ -20,7 +20,7 @@ export function App() {
         <Switch>
           <Route path="/game-list" component={GameListPage} />
           <Route path="/lobby" component={GameLobbyPage} />
-          <Route path="/score" component={ScorePage} />
+          <Route path="/history" component={HistoriesPage} />
           <Route path="/top" component={TopPage} />
           <Redirect from="/" to="/game-list" />
         </Switch>

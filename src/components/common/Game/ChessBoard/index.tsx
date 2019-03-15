@@ -14,7 +14,7 @@ interface IProps {
 }
 
 export const ChessBoard: React.SFC<IProps> = ({ w, n }) => {
-  const width = dividableNumber(w, n) * 1.0;
+  const width = dividableNumber(Math.min(w, 800), n) * 1.0;
 
   const cellSize = width / n;
 
@@ -41,7 +41,10 @@ export const ChessBoard: React.SFC<IProps> = ({ w, n }) => {
   ));
 
   return (
-    <div className={styles['chess-board']} style={{ width: width + 80 }}>
+    <div
+      className={styles['chess-board']}
+      style={{ width: width + 80, height: width + 80 }}
+    >
       <div style={{ position: 'relative' }}>
         {grid}
         {intersectionPoints}
