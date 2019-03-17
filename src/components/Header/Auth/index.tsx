@@ -8,6 +8,7 @@ import {
   doLogout
 } from '../../../store/effects';
 import { Typography, Button, Grid, TextField } from '@material-ui/core';
+import { UserInfoAppender } from './UserInfo';
 
 const Auth: React.SFC<any> = () => {
   const user = useUser();
@@ -22,14 +23,6 @@ const Auth: React.SFC<any> = () => {
 
   const inputs = !user && (
     <Grid container item spacing={8}>
-      <Grid item>
-        <TextField
-          style={{ width: 100 }}
-          placeholder="用户名"
-          {...text('name')}
-          required
-        />
-      </Grid>
       <Grid item>
         <TextField
           style={{ width: 100 }}
@@ -53,8 +46,10 @@ const Auth: React.SFC<any> = () => {
     <Grid item>
       <span>学号:</span>
       <span>{user!.no}&nbsp;</span>
-      <span>姓名:</span>
-      <span>{user!.name}&nbsp;</span>
+      <If condition={!!user!.name}>
+        <span>姓名:</span>
+        <span>{user!.name}&nbsp;</span>
+      </If>
     </Grid>
   );
 
@@ -93,22 +88,25 @@ const Auth: React.SFC<any> = () => {
   );
 
   return (
-    <Typography component="div">
-      <Grid
-        wrap="nowrap"
-        container={true}
-        item={true}
-        justify="space-between"
-        alignItems="center"
-        spacing={8}
-      >
-        {inputs}
-        {loginButton}
-        {registerButton}
-        {userInfo}
-        {logoutButton}
-      </Grid>
-    </Typography>
+    <>
+      <Typography component="div">
+        <Grid
+          wrap="nowrap"
+          container={true}
+          item={true}
+          justify="space-between"
+          alignItems="center"
+          spacing={8}
+        >
+          {inputs}
+          {loginButton}
+          {registerButton}
+          {userInfo}
+          {logoutButton}
+        </Grid>
+      </Typography>
+      <UserInfoAppender />
+    </>
   );
 };
 

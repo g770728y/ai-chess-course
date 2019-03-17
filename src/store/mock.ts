@@ -1,32 +1,35 @@
-import { IStore, IRole, IUser, IActive } from '.';
-import { readUserFromLocalStorage } from './helper';
+import { IStore, IColor, IUser, IActor } from '.';
 import { range } from 'rambda';
+import { readAuthFromLocalStorage } from './helper';
 
 const desks = range(0, 20).map(i => ({
   id: i + 1,
   players: [undefined, undefined]
 }));
 
+const authInfo = readAuthFromLocalStorage();
+
 export const store: IStore = {
+  errors: [],
   // user: {
   //   id: 1,
   //   name: 'gtt',
   //   password: 'xxx',
   //   no: 'xx'
   // },
-  user: readUserFromLocalStorage(),
+  user: authInfo && authInfo.user,
   // 当前用户是否正在游戏(显示游戏界面)
   game: {
     loading: false,
     data: {
       id: 1,
       status: 'working',
-      activeRole: 'w',
-      steps: [[0, 0, 'b'], [0, 1, 'w']],
+      activeColor: 'white',
+      steps: [[0, 0, 'black'], [0, 1, 'white']],
       winner: undefined,
       players: [
-        { id: 1, role: 'b', name: 'gtt', active: 'ai' },
-        { id: 2, role: 'w', name: 'wsq', active: 'human' }
+        { userId: 1, color: 'black', name: 'gtt', actor: 'ai' },
+        { userId: 2, color: 'white', name: 'wsq', actor: 'human' }
       ]
     }
   },
@@ -36,15 +39,15 @@ export const store: IStore = {
       {
         id: 1,
         players: [
-          { id: 1, role: 'b', name: 'gtt', active: 'ai' },
-          { id: 2, role: 'w', name: 'wsq', active: 'human' }
+          { userId: 1, color: 'black', name: 'gtt', actor: 'ai' },
+          { userId: 2, color: 'white', name: 'wsq', actor: 'human' }
         ]
       },
       {
         id: 2,
         players: [
-          { id: 3, role: 'b', name: '北乔峰', active: 'ai' },
-          { id: 4, role: 'w', name: '南慕容', active: 'human' }
+          { userId: 3, color: 'black', name: '北乔峰', actor: 'ai' },
+          { userId: 4, color: 'white', name: '南慕容', actor: 'human' }
         ]
       }
     ]
@@ -54,22 +57,22 @@ export const store: IStore = {
     loading: false,
     data: [
       {
-        id: 1,
+        userId: 1,
         name: 'gtt',
         no: '33'
       },
       {
-        id: 2,
+        userId: 2,
         name: 'wsq',
         no: '34'
       },
       {
-        id: 3,
+        userId: 3,
         name: '北乔峰',
         no: '35'
       },
       {
-        id: 4,
+        userId: 4,
         name: '南慕容',
         no: '36'
       }
@@ -82,13 +85,16 @@ export const store: IStore = {
       {
         id: 1,
         players: [
-          { id: 1, name: 'gtt', active: 'ai' as IActive },
-          { id: 2, name: 'wsq', active: 'human' as IActive }
+          { userId: 1, name: 'gtt', actor: 'ai' as IActor },
+          { userId: 2, name: 'wsq', actor: 'human' as IActor }
         ]
       },
       {
         id: 2,
-        players: [{ id: 3, name: '北乔峰', active: 'ai' as IActive }, undefined]
+        players: [
+          { userId: 3, name: '北乔峰', actor: 'ai' as IActor },
+          undefined
+        ]
       },
       ...desks.slice(2)
     ]

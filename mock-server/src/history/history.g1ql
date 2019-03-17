@@ -1,0 +1,26 @@
+type Query {
+  # 查询 userId 的全部参赛历史记录
+  histories(userId): [History]
+}
+
+# 参赛历史记录
+# 只有ai角色需要被记录历史
+type History {
+  # 玩家对应的user表的id
+  playerId: Int
+  # 对手
+  opponent: Player
+  # 游戏结果(对userId而言)
+  result: GameResult
+  # 创建时间(游戏结束时间)
+  createdAt: String
+}
+
+enum GameResult {
+  # 胜
+  win
+  # 负
+  lost
+  # 平
+  draw
+}

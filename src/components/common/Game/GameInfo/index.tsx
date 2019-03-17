@@ -1,7 +1,7 @@
 import * as React from 'react';
 import clock from './clock.png';
 import styles from './style.module.scss';
-import { IRole, IGameInfo_Player } from '../../../../store';
+import { IColor, IGameInfo_Player } from '../../../../store';
 import {
   useCurrentGameWinner,
   useCurrentActivePlayer,
@@ -21,9 +21,9 @@ import useRouter from 'use-react-router';
 
 function playerInfo(gameId: number, player: IGameInfo_Player) {
   const activePlayer = useCurrentActivePlayer();
-  const winner: IRole | undefined = useCurrentGameWinner();
-  const isActive = activePlayer.id === player.id;
-  const isWinner = winner === player.role;
+  const winner: IColor | undefined = useCurrentGameWinner();
+  const isActive = activePlayer.userId === player.userId;
+  const isWinner = winner === player.color;
 
   return (
     <span style={{ marginLeft: 15, color: '#666' }}>
@@ -39,8 +39,8 @@ export const GameInfo: React.SFC<{ gameId: number }> = ({ gameId }) => {
   const players = useCurrentPlayers()
     .slice(0)
     .sort(
-      ({ role: role0 }, { role: role1 }) =>
-        role0.charCodeAt(0) - role1.charCodeAt(1)
+      ({ color: color0 }, { color: color1 }) =>
+        color0.charCodeAt(0) - color1.charCodeAt(1)
     );
 
   const { history } = useRouter();
@@ -56,7 +56,7 @@ export const GameInfo: React.SFC<{ gameId: number }> = ({ gameId }) => {
     game &&
     !game.loading &&
     user &&
-    game.data.players.find(p => p.id === user.id);
+    game.data.players.find(p => p.userId === user.id);
 
   return (
     <div className={styles['game-info']}>
@@ -67,11 +67,11 @@ export const GameInfo: React.SFC<{ gameId: number }> = ({ gameId }) => {
           </Typography>
           <Divider style={{ marginTop: 15, marginBottom: 15 }} />
           <div className={styles['row']}>
-            <ChessPieceRaw role="b" r={14} />
+            <ChessPieceRaw color="black" r={14} />
             {playerInfo(gameId, players[0])}
           </div>
           <div className={styles['row']}>
-            <ChessPieceRaw role="w" r={14} />
+            <ChessPieceRaw color="white" r={14} />
             {playerInfo(gameId, players[1])}
           </div>
         </CardContent>

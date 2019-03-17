@@ -1,0 +1,6 @@
+type Mutation {
+  # 更新用户信息
+  # 暂时只支持用户名
+  # 可扩展支持 avatar + sex 等 字段
+  updateUser(id: Int!, name: String!): Boolean
+}

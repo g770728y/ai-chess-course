@@ -3,7 +3,7 @@ import { useAtom } from '@dbeining/react-atom';
 import {
   appState,
   IStep,
-  IRole,
+  IColor,
   IUser,
   IDesk,
   IGame,
@@ -65,21 +65,21 @@ export function useCurrentPlayers() {
   });
 }
 
-export function useCurrentActiveRole() {
+export function useCurrentActiveColor() {
   return useAtom(appState, {
-    select: s => s.game.data.activeRole || 'b'
+    select: s => s.game.data.activeColor || 'black'
   });
 }
 
 // 当前棋局的活动参与者
 export function useCurrentActivePlayer(): IGameInfo_Player {
-  const activeRole = useCurrentActiveRole();
+  const activeColor = useCurrentActiveColor();
   const players = useCurrentPlayers();
-  return players.find(p => p.role === activeRole)!;
+  return players.find(p => p.color === activeColor)!;
 }
 
 // 获取当前游戏胜者
-export function useCurrentGameWinner(): IRole | undefined {
+export function useCurrentGameWinner(): IColor | undefined {
   const { status, winner } = useAtom(appState, {
     select: s => ({
       status: s.game.data.status,
@@ -101,9 +101,9 @@ export function useCurrentUserMovable() {
     user &&
     game.data.players.find(p => {
       const activePlayer = game.data.players.find(
-        p => p.role === game.data.activeRole
+        p => p.color === game.data.activeColor
       )!;
-      return activePlayer.active === 'human' && activePlayer.id === user.id;
+      return activePlayer.actor === 'human' && activePlayer.userId === user.id;
     })
   );
 }
@@ -130,7 +130,9 @@ export function useHistories() {
   return useAtom(appState, {
     select: s => {
       const data = (s.histories.data || []).map(history => {
-        const opponent = s.players.data.find(p => p.id === history.opponentId)!;
+        const opponent = s.players.data.find(
+          p => p.userId === history.opponentId
+        )!;
         return { opponent, ...history };
       });
       return { ...s.histories, data };
@@ -143,10 +145,17 @@ export function useStats() {
   return useAtom(appState, {
     select: s => {
       const data = s.stats.data.map(stat => {
-        const player = s.players.data.find(p => p.id === stat.playerId)!;
+        const player = s.players.data.find(p => p.userId === stat.playerId)!;
         return { player, ...stat };
       });
       return { ...s.stats, data };
     }
+  });
+}
+
+// 全部错误消息
+export function useErrorMessages() {
+  return useAtom(appState, {
+    select: s => s.errors || []
   });
 }

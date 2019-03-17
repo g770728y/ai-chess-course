@@ -1,0 +1,24 @@
+type Mutation {
+  # 使用 学号 与 密码 登录
+  login(no: String!, password: String!): LoginResult
+
+  # 使用 学号 与 密码 注册
+  register(no: String!, password: String!): LoginResult
+}
+
+# 登录成功返回结果
+type LoginResult {
+  # 用户信息
+  user: User!
+  # 认证 jwt string
+  token: String!
+}
+
+# 用户
+type User {
+  id: Int!
+  # 学号, 必填, 唯一
+  no: String!
+  # 姓名
+  name: String
+}

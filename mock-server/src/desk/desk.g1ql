@@ -1,0 +1,30 @@
+type Query {
+  # 根据 id 查取  
+  desk(id:Int): Desk
+
+  # 全部座位
+  desks: Desk[]
+}
+
+# 大厅 桌子
+type Desk {
+  id: Int
+
+  # 已落座的玩家 (0-2位)
+  players: [DeskPlayer]!
+}
+
+# 玩家信息
+type DeskPlayer {
+  userId: Int
+  # 玩家姓名
+  name: String
+  # 玩家使用human 还是 ai
+  actor: Actor
+}
+
+# 玩家使用的角色
+enum Actor {
+  human
+  ai
+}

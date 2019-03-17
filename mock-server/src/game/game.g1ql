@@ -1,0 +1,74 @@
+type Query {
+  # 根据id获取游戏
+  game(id:Int): Game
+
+  # 获取全部游戏列表
+  # 注意: 前端不需要 game.steps 字段
+  games(): [Game!]!
+}
+
+type Mutation {
+  # 根据参与双方创建游戏, 并返回创建好的游戏
+  createGame(players: [Player!]!): Game!
+}
+
+# 游戏状态
+enum GameState {
+  # 准备
+  ready
+  # 进行中
+  working
+  # 结束
+  finished
+}
+
+# 参与角色
+enum Color {
+  # 白方 white
+  white
+  # 黑方 black
+  black
+}
+
+# 步数
+type Step {
+  # 落在哪行(0+)
+  row: Int 
+  # 落在哪列(0+)
+  col: Int 
+  # 参与角色 w | b
+  color: Color
+}
+
+# 玩家扮演角色
+enum Actor {
+  human
+  ai
+}
+
+# 玩家信息
+type PlayerInfo {
+  # 玩家的 用户id
+  userId: Int
+  # 玩家颜色 b | w
+  color: Color
+  # 玩家姓名
+  name: String
+  # 玩家使用真人还是ai
+  actor: Actor
+}
+
+# 某局游戏
+type Game {
+  id: Int
+  # 游戏进行状态
+  status: GameState
+  # 当前由谁落子
+  activeColor: Color
+  # 全部已完成的steps
+  steps: [Step!]!
+  # 胜方 w | b
+  winner: Color
+  # 参与双方
+  players: [PlayerInfo!]!
+}

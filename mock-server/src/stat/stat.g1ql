@@ -1,0 +1,17 @@
+type Query {
+  # 全部玩家的统计信息
+  stats: [Stat]!
+}
+
+# 游戏状态统计
+# 统计内容: 每位玩家的胜负平统计
+type Stat {
+  # 玩家
+  player: Player
+  # 胜场
+  win: Int
+  # 负场
+  lost: Int
+  # 平局
+  draw: Int
+}

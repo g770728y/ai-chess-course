@@ -1,17 +1,17 @@
 import { Atom } from '@dbeining/react-atom';
 import { store } from './mock';
 
-export type IRole = 'w' | 'b';
+export type IColor = 'white' | 'black';
 
-export type IStep = [/* rowIdx */ number, /* colIdx */ number, 'w' | 'b'];
+export type IStep = [/* rowIdx */ number, /* colIdx */ number, IColor];
 
-export type IActive = 'human' | 'ai';
+export type IActor = 'human' | 'ai';
 
 export type IGameInfo_Player = {
-  id: number;
-  role: IRole;
-  name: string;
-  active: IActive;
+  userId: number;
+  color: IColor;
+  name?: string;
+  actor: IActor;
 };
 
 export type IGameState = 'ready' | 'working' | 'finished';
@@ -19,26 +19,26 @@ export type IGameState = 'ready' | 'working' | 'finished';
 export interface IGame {
   id: number;
   status?: IGameState;
-  activeRole?: IRole;
+  activeColor?: IColor;
   steps?: IStep[];
-  winner?: IRole;
+  winner?: IColor;
   players: [IGameInfo_Player, IGameInfo_Player];
 }
 
-export type IPageType = 'game-list' | 'game-lobby';
-
 export interface IPlayer {
-  id: number;
-  name: string;
+  userId: number;
+  name?: string;
   no: string;
 }
 
 export interface IDesk {
   id: number;
-  players: ({ id: number; name: string; active: IActive } | undefined)[];
+  players: ({ userId: number; name?: string; actor: IActor } | undefined)[];
 }
 
 export type IStore = {
+  errors?: string[];
+
   user?: IUser;
   game: {
     loading: boolean;
@@ -68,9 +68,9 @@ export type IStore = {
 
 export interface IUser {
   id: number;
-  name: string;
-  password?: string;
   no: string;
+  password?: string;
+  name?: string;
 }
 
 export interface IStat {

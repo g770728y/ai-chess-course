@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styles from './style.module.scss';
-import { useCurrentActiveRole } from '../../../../../../store/hooks';
+import { useCurrentActiveColor } from '../../../../../../store/hooks';
 import { IStep } from '../../../../../../store';
 import { onStep } from '../../../../../../store/actions';
 
@@ -20,10 +20,10 @@ const _IntersectionPoint: React.SFC<IProps> = ({
   cy
 }) => {
   const ref = React.createRef<HTMLDivElement>();
-  const activeRole = useCurrentActiveRole();
+  const activeColor = useCurrentActiveColor();
 
   function placeChessPiece() {
-    const step: IStep = [rowIdx, colIdx, activeRole];
+    const step: IStep = [rowIdx, colIdx, activeColor];
     onStep(step);
   }
 

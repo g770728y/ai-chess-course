@@ -1,0 +1,12 @@
+type Query {
+  # 获取全部玩家
+  players: [Player!]!
+}
+
+type Player {
+  userId: Int
+  # 姓名
+  name: String
+  # 学号
+  no: String
+}

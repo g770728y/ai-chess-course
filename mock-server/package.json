@@ -1,0 +1,30 @@
+{
+  "name": "mock-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf ./dist && tsc -p src/ && cd src && npx copyfiles ./**/*.gql ../dist/ && cd ..",
+    "dev": "yarn build && node ./dist/app.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/faker": "^4.1.5",
+    "apollo-server": "^2.4.8",
+    "faker": "^4.1.0",
+    "graphql": "^14.1.1",
+    "merge-graphql-schemas": "1.5.7",
+    "rambda": "^2.4.1"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.7",
+    "@types/jest": "^24.0.11",
+    "copyfiles": "^2.1.0",
+    "jest": "^24.5.0",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
+  }
+}

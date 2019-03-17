@@ -13,11 +13,11 @@ export function GameDesk({ id }: { id: number }) {
   const [leftPlayer, rightPlayer] = data.players;
 
   const leftPlayerNode =
-    leftPlayer === undefined ? '空' : `${leftPlayer.name}-${leftPlayer.active}`;
+    leftPlayer === undefined ? '空' : `${leftPlayer.name}-${leftPlayer.actor}`;
   const rightPlayerNode =
     rightPlayer === undefined
       ? '空'
-      : `${rightPlayer.name}-${rightPlayer.active}`;
+      : `${rightPlayer.name}-${rightPlayer.actor}`;
 
   function handleSeatClick(idx: number) {
     if (data.players[idx] === undefined) {

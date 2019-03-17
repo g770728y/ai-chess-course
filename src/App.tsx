@@ -11,11 +11,18 @@ import {
 } from 'react-router-dom';
 import { TopPage } from './components/TopPage';
 import { HistoriesPage } from './components/HistoriesPage';
+import { ErrorMessage } from './components/common/ErrorMessage';
+import * as e from './store/effects';
 
 export function App() {
+  React.useEffect(() => {
+    e.getPlayers();
+  }, []);
+
   return (
     <Router>
       <div className={styles['App']}>
+        <ErrorMessage />
         <Header />
         <Switch>
           <Route path="/game-list" component={GameListPage} />
