@@ -13,12 +13,3 @@ type LoginResult {
   # 认证 jwt string
   token: String!
 }
-
-# 用户
-type User {
-  id: Int!
-  # 学号, 必填, 唯一
-  no: String!
-  # 姓名
-  name: String
-}

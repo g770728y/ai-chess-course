@@ -22,7 +22,7 @@ const Histories: React.SFC = () => {
   if (loading) return null;
 
   return (
-    <Paper style={{ margin: 20 }}>
+    <Paper style={{ margin: 20, overflowY: 'auto' }}>
       <Table>
         <TableHead>
           <TableRow>

@@ -12,5 +12,11 @@ export default {
         return true;
       }
     }
+  },
+
+  Query: {
+    getUser: (root, { id }) => {
+      return users.find(user => user.id === id);
+    }
   }
 };

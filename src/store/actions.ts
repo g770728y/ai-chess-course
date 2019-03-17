@@ -1,5 +1,15 @@
 import { swap } from '@libre/atom';
-import { appState, IUser, IActor, IDesk, IPlayer, IStore, IColor } from '.';
+import {
+  appState,
+  IUser,
+  IActor,
+  IDesk,
+  IPlayer,
+  IStore,
+  IColor,
+  IHistory,
+  IStat
+} from '.';
 import produce from 'immer';
 
 ////////////////////////////////////////////////////////////////////  updator ////////////////////////////////////////////////////////////
@@ -93,5 +103,47 @@ export function fillPlayers(players: IPlayer[]) {
   update(s => {
     s.players.loading = false;
     s.players.data = players;
+  });
+}
+
+// 历史页面初始化
+export function readyGetHistories() {
+  update(s => {
+    s.histories.loading = true;
+  });
+}
+export function fillHistories(histories: IHistory[]) {
+  update(s => {
+    s.histories.loading = false;
+    s.histories.data = histories;
+  });
+}
+
+// 统计页面初始化
+export function readyGetStats() {
+  update(s => {
+    s.stats.loading = true;
+  });
+}
+export function fillStats(stats: IStat[]) {
+  update(s => {
+    s.stats.loading = false;
+    s.stats.data = stats.map(stat => ({
+      playerId: stat.player!.userId,
+      ...stat
+    }));
+  });
+}
+
+// 游戏大厅
+export function readyGetDesks() {
+  update(s => {
+    s.desks.loading = true;
+  });
+}
+export function fillDesks(desks: IDesk[]) {
+  update(s => {
+    s.desks.loading = false;
+    s.desks.data = desks;
   });
 }

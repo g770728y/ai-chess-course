@@ -1,9 +1,9 @@
 type Query {
-  # 根据 id 查取  
-  desk(id:Int): Desk
+  # 根据 id 查取
+  desk(id: Int): Desk
 
   # 全部座位
-  desks: Desk[]
+  desks: [Desk!]!
 }
 
 # 大厅 桌子

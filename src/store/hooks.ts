@@ -121,7 +121,8 @@ export function useDesks(): IDesk[] {
 // 获取肖前游戏大厅某张棋桌的信息
 export function useDesk(id: number): IDesk {
   return useAtom(appState, {
-    select: s => s.desks.data.find(desk => desk.id === id)!
+    select: s =>
+      s.desks.data.find(desk => desk.id === id) || { id, players: [] }
   }) as IDesk;
 }
 

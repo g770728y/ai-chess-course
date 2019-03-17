@@ -25,9 +25,3 @@ export const registerGql = gql`
     }
   }
 `;
-
-export const updateUserGql = gql`
-  mutation updateUser($id: Int!, $name: String!) {
-    updateUser(id: $id, name: $name)
-  }
-`;

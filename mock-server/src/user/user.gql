@@ -4,3 +4,16 @@ type Mutation {
   # 可扩展支持 avatar + sex 等 字段
   updateUser(id: Int!, name: String!): Boolean
 }
+
+type Query {
+  getUser(id: Int!): User
+}
+
+# 用户
+type User {
+  id: Int!
+  # 学号, 必填, 唯一
+  no: String!
+  # 姓名
+  name: String
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './App.module.scss';
 import { GameListPage } from './components/GameListPage';
 import { GameLobbyPage } from './components/GameLobbyPage';
@@ -15,11 +15,13 @@ import { ErrorMessage } from './components/common/ErrorMessage';
 import * as e from './store/effects';
 
 export function App() {
+  const [ready, setReady] = useState(false);
+
   React.useEffect(() => {
-    e.getPlayers();
+    Promise.all([e.getPlayers(), e.getUser()]).then(_ => setReady(true));
   }, []);
 
-  return (
+  const content = (
     <Router>
       <div className={styles['App']}>
         <ErrorMessage />
@@ -34,4 +36,6 @@ export function App() {
       </div>
     </Router>
   );
+
+  return ready ? content : null;
 }

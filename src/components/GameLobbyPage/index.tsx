@@ -4,9 +4,15 @@ import { Route, Switch } from 'react-router';
 import { GameLobby } from './GameLobby';
 import useRouter from 'use-react-router';
 import { Game } from '../common/Game';
+import * as e from '../../store/effects';
 
 export function GameLobbyPage() {
   const { match } = useRouter();
+
+  React.useEffect(() => {
+    e.getDesks();
+  }, []);
+
   return (
     <div className={styles['container']}>
       <Switch>

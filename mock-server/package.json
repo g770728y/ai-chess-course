@@ -14,6 +14,7 @@
   "dependencies": {
     "@types/faker": "^4.1.5",
     "apollo-server": "^2.4.8",
+    "dayjs": "^1.8.10",
     "faker": "^4.1.0",
     "graphql": "^14.1.1",
     "merge-graphql-schemas": "1.5.7",

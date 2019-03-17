@@ -16,11 +16,12 @@ declare const statItem: IStat;
 
 const Tops: React.SFC = () => {
   const { loading, data } = useStats();
+  console.log('stats:...', data);
 
   if (loading) return null;
 
   return (
-    <Grid container direction="column">
+    <Grid container direction="column" wrap="nowrap" style={{ height: '100%' }}>
       <Grid item style={{ marginLeft: 20, marginTop: 20 }}>
         <Button variant="contained" color="secondary">
           按胜场
@@ -31,8 +32,14 @@ const Tops: React.SFC = () => {
         </Button>
       </Grid>
 
-      <Grid item>
-        <Paper style={{ margin: 20 }}>
+      <Grid item style={{ flex: 'auto', height: 100 }}>
+        <Paper
+          style={{
+            margin: 20,
+            overflowY: 'auto',
+            height: 'calc(100% - 40px)'
+          }}
+        >
           <Table>
             <TableHead>
               <TableRow>

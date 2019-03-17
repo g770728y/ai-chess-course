@@ -7,6 +7,7 @@ import useRouter from 'use-react-router';
 import { useDesk } from '../../../store/hooks';
 
 export function GameDesk({ id }: { id: number }) {
+  console.log('desks id:', id);
   const data = useDesk(id);
   const { history, match } = useRouter();
 

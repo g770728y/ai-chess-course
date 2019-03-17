@@ -1,6 +1,6 @@
 type Query {
   # 查询 userId 的全部参赛历史记录
-  histories(userId): [History]
+  histories(playerId: Int!): [History]
 }
 
 # 参赛历史记录
