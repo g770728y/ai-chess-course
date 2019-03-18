@@ -1,15 +1,27 @@
 type Query {
   # 根据id获取游戏
-  game(id:Int): Game
+  game(id: Int): Game
 
   # 获取全部游戏列表
   # 注意: 前端不需要 game.steps 字段
-  games(): [Game!]!
+  games: [Game!]!
 }
 
 type Mutation {
   # 根据参与双方创建游戏, 并返回创建好的游戏
-  createGame(players: [Player!]!): Game!
+  createGame(
+    playerId0: Int!
+    player0Actor: Actor!
+    playerId1: Int!
+    player1Actor: Actor!
+    deskId: Int
+  ): Game!
+
+  # 落子
+  createStep(gameId: Int!, row: Int!, col: Int!, color: Color): Boolean
+
+  # 认输
+  lostGame(gameId: Int!, playerId: Int!): Boolean
 }
 
 # 游戏状态
@@ -33,9 +45,9 @@ enum Color {
 # 步数
 type Step {
   # 落在哪行(0+)
-  row: Int 
+  row: Int
   # 落在哪列(0+)
-  col: Int 
+  col: Int
   # 参与角色 w | b
   color: Color
 }
@@ -62,7 +74,7 @@ type PlayerInfo {
 type Game {
   id: Int
   # 游戏进行状态
-  status: GameState
+  status: GameState!
   # 当前由谁落子
   activeColor: Color
   # 全部已完成的steps
@@ -71,4 +83,14 @@ type Game {
   winner: Color
   # 参与双方
   players: [PlayerInfo!]!
+}
+
+# 落子通知
+type Subscription {
+  # 落子通知
+  # 客户端发送 gameId
+  # 回传新的Step
+  # 参数: gameId: 需要订阅哪场game
+  #      color: 需要订阅哪种颜色 (如果不提供, 则全部发送)
+  stepAdded(gameId: Int!, color: Color): Step!
 }

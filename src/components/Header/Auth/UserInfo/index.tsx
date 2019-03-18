@@ -21,7 +21,6 @@ const UserInfoAppender: React.SFC = () => {
   // 如果用户存在, 但没有输入name时才打开对话框!!!
   // 如果用户不存在, 则他应该先登录
   const showModal = !!user && !user.name;
-  console.log(showModal, user);
 
   if (!showModal) return null;
 

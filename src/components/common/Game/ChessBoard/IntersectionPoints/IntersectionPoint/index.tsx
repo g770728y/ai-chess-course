@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './style.module.scss';
 import { useCurrentActiveColor } from '../../../../../../store/hooks';
 import { IStep } from '../../../../../../store';
-import { onStep } from '../../../../../../store/actions';
+import * as e from '../../../../../../store/effects';
 
 interface IProps {
   r: number;
@@ -23,8 +23,8 @@ const _IntersectionPoint: React.SFC<IProps> = ({
   const activeColor = useCurrentActiveColor();
 
   function placeChessPiece() {
-    const step: IStep = [rowIdx, colIdx, activeColor];
-    onStep(step);
+    const step: IStep = { row: rowIdx, col: colIdx, color: activeColor };
+    e.createStep(step);
   }
 
   const style: React.CSSProperties = {

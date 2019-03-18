@@ -8,9 +8,15 @@ import * as e from '../../store/effects';
 
 export function GameLobbyPage() {
   const { match } = useRouter();
+  const timeHandlerRef = React.useRef<any>();
 
   React.useEffect(() => {
     e.getDesks();
+    timeHandlerRef.current = setInterval(() => {
+      e.getDesks();
+    }, 10000);
+
+    return () => clearInterval(timeHandlerRef.current);
   }, []);
 
   return (

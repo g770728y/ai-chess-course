@@ -25,6 +25,17 @@ export function useCurrentGameId() {
   });
 }
 
+export function useGameOnDesk(deskId: number) {
+  return useAtom(appState, {
+    select: s => {
+      const desk = s.desks.data.find(d => d.id === deskId);
+      if (desk && desk.gameId) {
+        return s.games.data.find(g => g.id === desk.gameId);
+      }
+    }
+  }) as IGame | null | undefined;
+}
+
 export function useGames() {
   return useAtom(appState, {
     select: s => s.games.data

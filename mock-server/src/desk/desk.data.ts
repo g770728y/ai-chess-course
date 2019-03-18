@@ -2,6 +2,8 @@ import { range } from 'rambda';
 import faker from 'faker';
 import { players } from '../player/player.data';
 
+let n = 0;
+
 // 共20张棋桌
 export const desks = range(0, 20).map(i => {
   const playerCount = faker.random.arrayElement([0, 1, 2]);
@@ -12,6 +14,13 @@ export const desks = range(0, 20).map(i => {
     const actor = faker.random.arrayElement(['human', 'ai']);
     return { userId: player.userId, name: player.name, actor };
   });
-
-  return { id: i, players: _players };
+  // 会造成循环引用
+  // const gameIds = games.map(g => g.id);
+  // const gameId = faker.random.arrayElement(gameIds);
+  // 所以以下假设: 只要一张desk 有两人落座, 表示一局game
+  return {
+    id: i,
+    players: _players,
+    gameId: playerCount === 2 ? n++ : undefined
+  };
 });

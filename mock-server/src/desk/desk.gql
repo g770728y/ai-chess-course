@@ -10,6 +10,8 @@ type Query {
 type Desk {
   id: Int
 
+  gameId: Int
+
   # 已落座的玩家 (0-2位)
   players: [DeskPlayer]!
 }

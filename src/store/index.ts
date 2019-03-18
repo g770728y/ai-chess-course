@@ -3,7 +3,7 @@ import { store } from './mock';
 
 export type IColor = 'white' | 'black';
 
-export type IStep = [/* rowIdx */ number, /* colIdx */ number, IColor];
+export type IStep = { row: number; col: number; color: IColor };
 
 export type IActor = 'human' | 'ai';
 
@@ -33,6 +33,7 @@ export interface IPlayer {
 
 export interface IDesk {
   id: number;
+  gameId: number;
   players: ({ userId: number; name?: string; actor: IActor } | undefined)[];
 }
 

@@ -29,12 +29,12 @@ export const ChessBoard: React.SFC<IProps> = ({ w, n }) => {
 
   // 全部已落下的棋子
   const _steps = useCurrentSteps();
-  const chessPieces = _steps.map(([rowIdx, colIdx, color]) => (
+  const chessPieces = _steps.map(({ row, col, color }) => (
     <ChessPiece
-      key={`${rowIdx}:${colIdx}`}
+      key={`${row}:${col}`}
       r={chessRadius}
-      rowIdx={rowIdx}
-      colIdx={colIdx}
+      rowIdx={row}
+      colIdx={col}
       color={color}
       cellSize={cellSize}
     />

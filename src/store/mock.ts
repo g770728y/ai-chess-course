@@ -4,6 +4,7 @@ import { readAuthFromLocalStorage } from './helper';
 
 const desks = range(0, 20).map(i => ({
   id: i + 1,
+  gameId: 1,
   players: [undefined, undefined]
 }));
 
@@ -25,7 +26,10 @@ export const store: IStore = {
       id: 1,
       status: 'working',
       activeColor: 'white',
-      steps: [[0, 0, 'black'], [0, 1, 'white']],
+      steps: [
+        { row: 0, col: 0, color: 'black' },
+        { row: 0, col: 1, color: 'white' }
+      ],
       winner: undefined,
       players: [
         { userId: 1, color: 'black', name: 'gtt', actor: 'ai' },
@@ -84,6 +88,7 @@ export const store: IStore = {
     data: [
       {
         id: 1,
+        gameId: 1,
         players: [
           { userId: 1, name: 'gtt', actor: 'ai' as IActor },
           { userId: 2, name: 'wsq', actor: 'human' as IActor }
@@ -91,6 +96,7 @@ export const store: IStore = {
       },
       {
         id: 2,
+        gameId: 2,
         players: [
           { userId: 3, name: '北乔峰', actor: 'ai' as IActor },
           undefined

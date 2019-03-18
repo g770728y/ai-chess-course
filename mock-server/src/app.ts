@@ -10,6 +10,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: params => {
+    if (!params.req) return {};
     const token = (params.req.headers.authorization || '').substring(7);
     return { user: token && token.length > 0 ? users[0] : undefined };
   }

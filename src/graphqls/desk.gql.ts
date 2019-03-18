@@ -9,6 +9,7 @@ export const getDesksGql = gql`
         name
         actor
       }
+      gameId
     }
   }
 `;

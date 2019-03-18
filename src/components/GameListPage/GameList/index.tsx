@@ -1,14 +1,6 @@
 import * as React from 'react';
 import { useCurrentGameId, useGames } from '../../../store/hooks';
-import {
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Icon,
-  Grid,
-  Drawer
-} from '@material-ui/core';
+import { List, ListItem, ListItemText, Grid } from '@material-ui/core';
 import SwapHoriz from '@material-ui/icons/SwapHoriz';
 import { IGame } from '../../../store';
 import useRouter from 'use-react-router';

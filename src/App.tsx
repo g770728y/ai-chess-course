@@ -18,7 +18,9 @@ export function App() {
   const [ready, setReady] = useState(false);
 
   React.useEffect(() => {
-    Promise.all([e.getPlayers(), e.getUser()]).then(_ => setReady(true));
+    Promise.all([e.getPlayers(), e.getUser(), e.getGames()]).then(_ =>
+      setReady(true)
+    );
   }, []);
 
   const content = (

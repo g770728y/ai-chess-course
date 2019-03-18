@@ -18,6 +18,7 @@ import {
 } from '@material-ui/core';
 import { ChessPieceRaw } from '../ChessBoard/ChessPiece';
 import useRouter from 'use-react-router';
+import * as e from '../../../../store/effects';
 
 function playerInfo(gameId: number, player: IGameInfo_Player) {
   const activePlayer = useCurrentActivePlayer();
@@ -46,6 +47,7 @@ export const GameInfo: React.SFC<{ gameId: number }> = ({ gameId }) => {
   const { history } = useRouter();
 
   const giveup = React.useCallback(() => {
+    e.lostGame(gameId);
     history.goBack();
   }, []);
 

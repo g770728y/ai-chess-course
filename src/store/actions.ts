@@ -8,7 +8,9 @@ import {
   IStore,
   IColor,
   IHistory,
-  IStat
+  IStat,
+  IGame,
+  IStep
 } from '.';
 import produce from 'immer';
 
@@ -52,7 +54,7 @@ export function sitDown(deskId: number, playerIdx: number, active: IActor) {
 }
 
 // 走一步
-export function onStep(step: [number, number, IColor]) {
+export function onStep(step: IStep) {
   update(s => {
     const activeColor = s.game.data['activeColor'];
     s.game.data.activeColor = activeColor === 'black' ? 'white' : 'black';
@@ -84,10 +86,8 @@ export function updateUser(userPatch: { id: number; name: string }) {
     // 更新players 列表
     if (s.players.data && s.players.data.length > 0) {
       const idx = s.players.data.findIndex(p => {
-        console.log(p);
         return p.userId === id;
       });
-      console.log('idx:', idx, id, s.players.data.slice(0));
       s.players.data[idx]['name'] = name;
     }
   });
@@ -145,5 +145,40 @@ export function fillDesks(desks: IDesk[]) {
   update(s => {
     s.desks.loading = false;
     s.desks.data = desks;
+  });
+}
+
+// 游戏列表
+export function readyGetGames() {
+  update(s => {
+    s.games.loading = true;
+  });
+}
+export function fillGames(games: IGame[]) {
+  update(s => {
+    s.games.loading = false;
+    s.games.data = games;
+  });
+}
+
+// 某局游戏
+export function readyGetGame() {
+  update(s => {
+    s.game.loading = true;
+  });
+}
+export function fillGame(game: IGame) {
+  update(s => {
+    s.game.loading = false;
+    s.game.data = game;
+  });
+}
+export function lostGame(gameId: number, playerId: number) {
+  update(s => {
+    const game = s.games.data.find(g => g.id === gameId);
+    if (game) {
+      game.status = 'finished';
+      game.winner = game.players.find(p => p.userId !== playerId)!.color;
+    }
   });
 }
