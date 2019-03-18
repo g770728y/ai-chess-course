@@ -1,44 +1,82 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 简介
 
-## Available Scripts
+用于 `ai` 棋手对战 网页端
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 前置知识
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+---
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### 玩家(user)
 
-### `npm test`
+代表一位用户(`user`)
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+### 角色(Actor)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 玩家可以使用`ai`角色, 也可以使用真人(`human`)角色
+- 如果愿意, 可以同时使用这两种角色
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 自动棋局(Game)
 
-### `npm run eject`
+- 后台系统自动配对两个`ai`玩家, 组成一盘棋局
+- 网页端可以自动读取所有自动棋局
+- 玩家可以观看任何自动棋局
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+---
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 手动棋局(Game)
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 基于游戏大厅 + 游戏桌 概念
+- 玩家 1 在游戏桌坐下, 选择 `ai/human`
+- 玩家 2 在游戏桌坐下, 选择 `ai/human`
+- 由玩家 2 开局
+- 如果玩家使用 `ai`, 将无法落子, 只能 弃权(认输)
+- 如果玩家使用 `human`, 可以落子, 可以 弃权(认输)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+---
 
-## Learn More
+## 采用技术
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 前端
+
+- 基于`react`, 并全面使用`hooks`, 抛弃`class`组件
+- 使用小巧的 `react-atom` 进行前端状态管理(代替 `redux`)
+- `apollo client` 与 服务端交互, 但不使用其 `cache` (代之以 `react-atom`)
+- 落子使用 `subscription` 通知前端
+
+---
+
+### mock server 端
+
+- 使用 `apollo server`
+
+---
+
+## 如何调试 & 开发真实服务端
+
+1. 先运行 mock:
+
+   cd mock-server
+   yarn dev
+   **没有实现自动刷新, 每次改 mock 后都要手工重新 yarn dev**
+
+2. 再运行前端
+
+   yarn start
+
+3. chrome 浏览器打开 http://localhost:3000
+
+4. 开发真实服务端时, 需先将 `constants.ts` 的`HOST`和`PORT`的值改成真实服务器地址
+
+---
+
+## 后端如何提供数据
+
+直接实现 `mock server` 目录下的 所有 `.gql` 文件

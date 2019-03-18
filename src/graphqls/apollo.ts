@@ -10,6 +10,7 @@ import { swap } from '@libre/atom';
 import { WebSocketLink } from 'apollo-link-ws';
 import { split } from 'apollo-link';
 import { getMainDefinition } from 'apollo-utilities';
+import { PORT, HOST } from '../constant';
 
 const errorLink = onError((err: ErrorResponse) => {
   const { graphQLErrors, networkError, operation, forward } = err;
@@ -35,10 +36,10 @@ const authLink = setContext((_: any, args: any) => {
   };
 });
 
-const httpLink = new HttpLink({ uri: 'http://localhost:3999/graphql' });
+const httpLink = new HttpLink({ uri: `http://${HOST}:${PORT}/graphql` });
 
 const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:3999/graphql',
+  uri: `ws://${HOST}:${PORT}/graphql`,
   options: {
     reconnect: true
   }

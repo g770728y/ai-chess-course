@@ -1,6 +1,7 @@
 import { desks } from '../desk/desk.data';
 import faker from 'faker';
 import { range, uniqWith, map, compose } from 'rambda';
+import { GRID_COUNT } from '../constant';
 
 export type IColor = 'white' | 'black';
 
@@ -57,8 +58,8 @@ export const randomSteps = (): IStep[] => {
   const stepCount = faker.random.number(200);
 
   let steps = range(0, stepCount).map(i => ({
-    row: faker.random.number(18),
-    col: faker.random.number(18)
+    row: faker.random.number(GRID_COUNT + 1),
+    col: faker.random.number(GRID_COUNT + 1)
   }));
   steps = uniqWith((x: any, y) => x.row === y.row && x.col === y.col)(steps);
   steps = steps.map((step, i) => ({

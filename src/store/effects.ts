@@ -40,16 +40,20 @@ export function doLogin(user: IUserInput) {
 }
 
 export function doRegister(user: IUserInput) {
-  return client
-    .mutate({
-      mutation: registerGql,
-      variables: user,
-      fetchPolicy: 'no-cache'
-    })
-    .then(({ data: { register: { user, token } } }) => {
-      writeLocalStorage('auth', { user, token });
-      a.login(user);
-    });
+  return (
+    client
+      .mutate({
+        mutation: registerGql,
+        variables: user,
+        fetchPolicy: 'no-cache'
+      })
+      .then(({ data: { register: { user, token } } }) => {
+        writeLocalStorage('auth', { user, token });
+        a.login(user);
+      })
+      // 需要刷新玩家信息, 不然看不到刚注册的玩家
+      .then(() => getPlayers())
+  );
 }
 
 export function doLogout() {

@@ -2,6 +2,7 @@ import { games, IStep, IColor } from './game.data';
 import { without, range, last, map, concat, splitEvery, flatten } from 'rambda';
 import faker from 'faker';
 import { pubsub, STEP_ADDED, GAME_ENDED } from '../pubsub';
+import { GRID_COUNT } from '../constant';
 
 // 谁哪个颜色落子
 function getNextColor(steps: IStep[]): IColor {
@@ -13,7 +14,10 @@ function getNextColor(steps: IStep[]): IColor {
 }
 
 // 随机落子
-const _cells = map(i => map(j => [i, j], range(0, 18)), range(0, 18));
+const _cells = map(
+  i => map(j => [i, j], range(0, GRID_COUNT + 1)),
+  range(0, GRID_COUNT + 1)
+);
 const allGridCells = (splitEvery(2, flatten(_cells)) as unknown) as number[][]; //
 const toString = (x: number[]) => JSON.stringify(x);
 const parse = (str: string) => JSON.parse(str);
