@@ -88,7 +88,12 @@ export function updateUser(userPatch: { id: number; name: string }) {
       const idx = s.players.data.findIndex(p => {
         return p.userId === id;
       });
-      s.players.data[idx]['name'] = name;
+      if (idx < 0) {
+        console.log({ userId: id, name, no: s.user!['no'] });
+        s.players.data.push({ userId: id, name, no: s.user!['no'] });
+      } else {
+        s.players.data[idx]['name'] = name;
+      }
     }
   });
 }
