@@ -89,7 +89,6 @@ export function updateUser(userPatch: { id: number; name: string }) {
         return p.userId === id;
       });
       if (idx < 0) {
-        console.log({ userId: id, name, no: s.user!['no'] });
         s.players.data.push({ userId: id, name, no: s.user!['no'] });
       } else {
         s.players.data[idx]['name'] = name;

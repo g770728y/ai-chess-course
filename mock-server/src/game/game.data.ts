@@ -58,8 +58,8 @@ export const randomSteps = (): IStep[] => {
   const stepCount = faker.random.number(200);
 
   let steps = range(0, stepCount).map(i => ({
-    row: faker.random.number(GRID_COUNT + 1),
-    col: faker.random.number(GRID_COUNT + 1)
+    row: faker.random.number(GRID_COUNT),
+    col: faker.random.number(GRID_COUNT)
   }));
   steps = uniqWith((x: any, y) => x.row === y.row && x.col === y.col)(steps);
   steps = steps.map((step, i) => ({
